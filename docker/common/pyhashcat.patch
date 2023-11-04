@@ -1,0 +1,20 @@
+diff --git a/pyhashcat/pyhashcat.c b/pyhashcat/pyhashcat.c
+index dce7f1a..990e57d 100755
+--- a/pyhashcat/pyhashcat.c
++++ b/pyhashcat/pyhashcat.c
+@@ -907,6 +907,7 @@ static PyObject *hashcat_status_get_status (hashcatObject * self, PyObject * noa
+ PyDoc_STRVAR(hashcat_list_hashmodes__doc__,
+ "Return dictionary containing all hash modes\n\n");
+ 
++#ifndef _USAGE_H
+ typedef struct usage_sort
+ {
+   u32   hash_mode;
+@@ -933,6 +934,7 @@ static int sort_by_usage (const void *p1, const void *p2)
+ 
+   return 0;
+ }
++#endif
+ 
+ static PyObject *hashcat_list_hashmodes (hashcatObject * self, PyObject * noargs)
+ {
