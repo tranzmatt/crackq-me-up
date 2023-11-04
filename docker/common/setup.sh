@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Setup crackq user
 groupadd -g 1111 -r crackq && useradd -u 1111 -r -g crackq crackq
 mkdir /home/crackq && chown crackq:crackq /home/crackq
@@ -40,7 +42,7 @@ git clone https://github.com/f0cker/pyhashcat.git
 cd ./pyhashcat/pyhashcat
 
 #install stable hashcat
-wget https://github.com/hashcat/hashcat/archive/refs/tags/v6.2.1.tar.gz
+wget https://github.com/hashcat/hashcat/archive/refs/tags/v6.2.6.tar.gz
 tar xvfz v*.tar.gz && mv hashcat-* hashcat
 #or install latest hashcat from git
 #git clone https://github.com/hashcat/hashcat.git
@@ -50,5 +52,6 @@ make clean
 make install
 make install_library
 cd ../
+patch -p2 -i $DOCKYARD/pyhashcat.patch
 python3 setup.py build_ext
 python3 setup.py install
